@@ -5,13 +5,13 @@ from dotenv import load_dotenv
 import discord
 from discord.ext import commands
 
-from Managers.FirebaseManager import FirebaseManager
-from Managers.AIManager import AIManager
-from Managers.QuestionAnswerer import QuestionAnswerer
-from Managers.MessageSender import MessageSender
+from managers.FirebaseManager import FirebaseManager
+from managers.AIManager import AIManager
+from managers.QuestionAnswerer import QuestionAnswerer
+from managers.MessageSender import MessageSender
 
-from Constants.Miscellaneous import Miscellaneous
-from Constants.States import States
+from constants.Miscellaneous import Miscellaneous
+from constants.States import States
 
 import sentry_sdk
 import asyncio

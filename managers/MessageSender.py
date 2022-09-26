@@ -1,4 +1,4 @@
-from Managers.FirebaseManager import FirebaseManager
+from managers.FirebaseManager import FirebaseManager
 
 class MessageSender(object):
 
