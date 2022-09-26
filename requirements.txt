@@ -3,3 +3,4 @@ discord.py
 firebase_admin
 requests
 sentry-sdk
+cohere
