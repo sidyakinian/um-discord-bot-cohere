@@ -68,7 +68,7 @@ Here's how to play:
 
 (Please type `!next` to see an example)''')
     # Wake up the model
-    await ai_manager.complete_prompt(f"mnli hypothesis: wake up premise: wake up")
+    await ai_manager.complete_prompt(f"wake up mnli wake up")
 
 
 @bot.event
@@ -236,7 +236,7 @@ def remove_punctuation(s):
 
 async def is_message_close(message, target_message):
     exactly_matches = remove_punctuation(message.lower()) == remove_punctuation(target_message.lower())
-    inference_matches = await ai_manager.complete_prompt(f"mnli hypothesis: {target_message} premise: {message}") == 'entailment'
+    inference_matches = await ai_manager.complete_prompt(f"{message} mnli {target_message}") == '0'
     return exactly_matches or inference_matches
 
 # Precondition: only for states starting with 'tutorial'

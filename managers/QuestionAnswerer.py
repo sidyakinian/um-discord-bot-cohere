@@ -7,7 +7,7 @@ class QuestionAnswerer(object):
         self.ai_manager = ai_manager
 
     def make_prompt(self, context, question):
-        prompt = f'mnli hypothesis: {question}. premise: {context}'
+        prompt = f'{context} mnli {question}'
         return prompt
 
     async def answer_question(self, puzzle_id, question):
@@ -15,11 +15,11 @@ class QuestionAnswerer(object):
         context = puzzle_data['context']
         prompt = self.make_prompt(context, question)
         model_reply = await self.ai_manager.complete_prompt(prompt)
-        if model_reply == 'entailment':
+        if model_reply == '0':
             return 'Yes'
-        elif model_reply == 'neutral':
+        elif model_reply == '1':
             return 'Irrelevant'
-        elif model_reply == 'contradiction':
+        elif model_reply == '2':
             return 'No'
         else:
             return 'Sorry, something went wrong :('
@@ -28,7 +28,7 @@ class QuestionAnswerer(object):
         print('input_str:', input_str)
         completion = await self.ai_manager.complete_prompt(input_str)
         print('completion:', completion)
-        return completion == 'entailment'
+        return completion == '0'
 
     async def bool_from_json(self, guess, json_dict, check_str):
         if len(json_dict) != 1:
@@ -37,7 +37,7 @@ class QuestionAnswerer(object):
         
         async def check_true(element):
             if isinstance(element, str):
-                is_true = await check_str(f"mnli hypothesis: {element} premise: {guess}")
+                is_true = await check_str(f"{guess} mnli {element}")
                 return is_true
             elif isinstance(element, dict):
                 is_true = await self.bool_from_json(guess, element, check_str)
