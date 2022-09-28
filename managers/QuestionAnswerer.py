@@ -15,6 +15,7 @@ class QuestionAnswerer(object):
         context = puzzle_data['context']
         prompt = self.make_prompt(context, question)
         model_reply = await self.ai_manager.complete_prompt(prompt)
+        print(f"model reply: {model_reply}")
         if model_reply == '0':
             return 'Yes'
         elif model_reply == '1':

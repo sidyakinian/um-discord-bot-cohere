@@ -16,5 +16,6 @@ class AIManager(object):
             examples=[]
         )
         response_labels = response.classifications[0].labels
+        print(f"response labels: {response_labels}")
         most_likely_label = max(response_labels, key = lambda k: response_labels.get(k).confidence)
         return most_likely_label
